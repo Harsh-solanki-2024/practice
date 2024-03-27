@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+
+    .main {
+        display: flex;
+        width: 100%;
+    }
+
+    .child {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        padding: 200px 0;
+    }
+
+    .text-inputs {
+        width: 250px;
+    }
+</style>
+
+<body>
+
+
+    <div class="main">
+        <div class="child">
+            <span style="border: 2px solid black; padding: 25px; background-color: bisque; border-radius: 25px;">
+                <form id="form">
+                    <p id="message"></p>
+                    <label for="password"> Enter Your email for Verification link:</label><br>
+                    <input type="text" id="email" name="email" class="text-inputs"><br>
+                    <p id="msg"></p>
+                    <span id="check_email"></span>
+                    <br>
+                    <center><input type="button" value="submit" onclick="return valid_and_post()"></center>
+                </form>
+        </div>
+    </div>
+    <script>
+
+        async function ajax_email_post_data() {
+
+            var email = document.getElementById("email").value;
+
+            let result = await fetch(`http://localhost:3050/checkemail/${email}`)
+
+            alert(email);
+
+            result = await result.json();
+
+            console.log(result);
+
+            if (result != true) {
+                document.getElementById("check_email").innerHTML = `email not exist`;
+                document.getElementById('email').focus();
+            }
+            else {
+                const form = document.getElementById('form');
+                const obj = new URLSearchParams(new FormData(form));
+                console.log(obj);
+
+                let res = await fetch("http://localhost:3050/forgotpass",
+                {
+                    headers:{
+                        'Content-Type':'application/x-www-form-urlencoded'
+                    },
+                    method:"POST",
+                    body:obj
+                })
+
+               window.location.replace("http://localhost:3050/forgotthank");
+            }
+        }
+
+        function valid_and_post(){
+            var flag = 0;
+
+                if (document.getElementById("email").value.trim() === null || document.getElementById("email").value.trim() === "") {
+                    document.getElementById("msg").innerHTML=`This field is required`;
+                    document.getElementById("email")
+                    document.getElementById("email").focus();
+                    flag = 1;
+                }
+                else {
+                    document.getElementById("msg").innerHTML=``;
+                }
+
+            if (flag == 1) {
+                return false;
+            }
+
+
+            // //this code for email validation
+
+            let email = document.getElementById("email");
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+            if (!(email.value.match(mailformat))) {
+                document.getElementById('msg').innerHTML = "Invalid Email"
+                email.focus();
+                return false;
+            }
+  
+            ajax_email_post_data();
+
+        }
+
+    </script>
+</body>
+
+
+</html>

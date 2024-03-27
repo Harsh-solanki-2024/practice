@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            margin-left: 50%;
+            margin-bottom: 30%;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <h1>Harsh Solanki</h1>
+        <h1>01-feb </h1>
+        <h1>24DEV033</h1>
+    </center>
+    <center>
+        <h1>Table GAME</h1>
+        <div> Score: <span id="score">0</span>
+        </div>
+        <div>Time: <span id="time">10</span></div>
+    </center>
+    <table id="demotbl" cellpadding="50" cellspacing="10" align="center">
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script>
+        var table = document.getElementById('demotbl');
+        var rowcount = 2;
+        var colcount = 2;
+        var score = 0;
+        time = 10;
+        setInterval(function () {
+            time--;
+            document.getElementById('time').innerHTML = time;
+            if(time == 0) {     
+                alert('your score is ' + score);
+                location.reload();
+                score = 0;
+                time = 10;
+            }
+        }, 1000)
+        
+        
+        
+        generateRandomCell();
+        function generateRandomCell() {
+            let randomrow = Math.floor(Math.random() * rowcount);
+            let randomcell = Math.floor(Math.random() * colcount);
+
+            let color = random_bg_color();
+            var cell;
+            for (let i = 0; i < table.rows.length; i++) {
+                for (let j = 0; j < table.rows[i].cells.length; j++) {
+                    table.rows[i].cells[j].style.backgroundColor = color;
+                }
+            }
+
+            var col = table.rows[randomrow].cells[randomcell];
+            col.style.opacity = '0.5';
+
+                col.addEventListener("click", myFunc);
+                function myFunc() {
+                if(rowcount < 10) addcol();
+                if(colcount < 10) addrow();
+                score++;
+                document.getElementById('score').innerHTML = score;
+                col.removeEventListener("click", myFunc);
+                col.style.opacity = '1';
+                generateRandomCell();
+                }
+            
+        }
+
+
+        function random_bg_color() {
+            
+            var x = Math.floor(Math.random() * 256);
+            var y = Math.floor(Math.random() * 256);
+            var z = Math.floor(Math.random() * 256);
+            var a = 1.0;
+            return "rgba(" + x + "," + y + "," + z + ")";
+        }
+
+
+        function addrow() {
+            var table = document.getElementById("demotbl");
+            var row_count = table.rows.length;
+            var col_count = table.rows[0].cells.length;
+            var row = table.insertRow(row_count);
+            var cell;
+            for (var i = 0; i < col_count; i++) {
+                cell = row.insertCell(i);
+            }
+            rowcount++;
+        }
+        function addcol() {
+            var table = document.getElementById("demotbl");
+            var row_count = table.rows.length;
+            var col_count = table.rows[0].cells.length;
+            var rows = table.rows
+            for (i = 0; i < row_count; i++) {
+                rows[i].insertCell(col_count);
+            }
+            colcount++;
+        }
+    </script>
+</body>
+
+</html>
