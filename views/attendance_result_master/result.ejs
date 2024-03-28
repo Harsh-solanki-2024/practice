@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td, th {
+          border: 2px solid #dddddd;
+          text-align: center;
+          padding: 5px;
+        }
+        </style>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <th rowspan="2">student_Id</th>
+            <th rowspan="2">student_name</th>
+            <th colspan="2">terminal_exam</th>
+            <th colspan="2">prelim_exam</th>
+            <th colspan="2">final_exam</th>
+            <th rowspan="2">Total_marks</th>
+            <th rowspan="2">Percentage</th>
+            <th rowspan="2">More details</th>
+          </tr>
+          <tr>
+            <th>practical_marks</th>
+            <th>theory_marks</th>
+            <th>practical_marks</th>
+            <th>theory_marks</th>
+            <th>practical_marks</th>
+            <th>theory_marks</th>
+          </tr>
+          <%for( var i=0; i<result.length;i++) {%> 
+            <tr>
+              <td><%=result[i].Id%></td>
+              <td><%=result[i].FirstName%></td>
+              <td><%=result[i].practical%></td>
+              <td><%=result[i].theory%></td>
+              <td><%=result2[i].practical%></td>
+              <td><%=result2[i].theory%></td>
+              <td><%=result3[i].practical%></td>
+              <td><%=result3[i].theory%></td>
+              <td><%=result[i].totalmarks + result2[i].totalmarks + result3[i].totalmarks%></td>
+              <td><%=(result[i].totalmarks + result2[i].totalmarks + result3[i].totalmarks)*6 / 100 %> %</td>
+              <td><a href="/result/user?userid=<%=result[i].Id%>">View More</a></td>
+            </tr>
+            <% }; %>
+          
+         </table>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+     img {
+        width: 100px;
+    }
+</style>
+<body>
+    <div id="data">
+
+    </div>
+    <div id="comment">
+     <button onclick="showcomment('<%=id%>')">Comment</button>
+     <p id="comment_data"></p>
+    </div>
+    <script>
+
+        const fetchdata = (id) =>{
+            var api="https://jsonplaceholder.typicode.com/users/"+id;
+            fetch(api)
+                .then(response => response.json())
+                .then((objectdata) => {
+                    console.log(objectdata);
+
+                    let tabledata = "";
+
+                    tabledata += `
+                    <p>ID:  ${objectdata.id}</p>
+                    <p>FirstName:  ${objectdata.name}</p>
+                    <p>LastName:  ${objectdata.username}</p>
+                    <p>Email:  ${objectdata.email}</p>
+                    <p>BirthDate:  ${objectdata.phone}</p>`
+                    document.getElementById("data").innerHTML = tabledata;
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+        fetchdata('<%=id%>');
+
+        async function showcomment(id){
+            var api2="https://jsonplaceholder.typicode.com/comments/"+id;
+            var datatwo= await fetch(api2)
+                .then(response => response.json())
+                .then((objectdata) => {
+                    console.log(objectdata);
+
+                    let tabledata = objectdata.body;
+
+                    document.getElementById("comment_data").innerHTML=tabledata;
+                 
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+        }
+    </script>
+</body>
+</html>

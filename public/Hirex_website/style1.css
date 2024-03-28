@@ -1,0 +1,500 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300&display=swap');
+*{
+    font-family: 'Nunito Sans', sans-serif;
+    box-sizing: border-box;
+}
+/* Orange : #FC7F3A
+TOMATO: #FC6868
+YELLOW : #FFBB38
+YELLOW2 : #FFC80A
+GREEN : #389B48
+GREEN2: #64E379
+BLACK : #000000
+WHITE : #FFFFFF
+SITE B.G : #F9F7EE
+CARD B.G : #EBE9DE */
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #F9F7EE;
+}
+.container{
+    max-width: 1440px;
+    margin: 0 auto;
+}
+/* header section */
+
+.header{
+    background-color: #F9F7EE;
+}
+.mainicon{
+    width: 50%;
+    margin-left: 50px;
+}
+.navi{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+a{
+    text-decoration: none;
+    color:black;
+    font-size: 14px;
+    font-weight: 300;
+}
+ul{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    text-decoration: none;
+}
+li{
+  text-decoration: none;
+  margin-top:15px;
+}
+.btn_style1{
+  background-color: black;
+  color: white;
+  border-radius: 5px;
+  text-decoration-style: none;
+  width: 100px;
+  height: 32px;
+  font-size: 12px;
+  font-weight: 900;
+  margin-top:-5px;
+}
+
+
+
+/* secondsection */
+.secondsection{
+    display: flex;
+}
+.secondfirst{
+    width:70%;
+    
+}
+.secondfirsthead{
+    display: flex;
+}
+    
+#input_second_form{
+    box-shadow: none;
+    width: 200px;
+    height: 40px;
+    margin-left: 85px;
+    margin-top: 30px;
+    box-shadow: 8px 8px;
+}
+#btn_second_form{
+    margin-left: -5px;
+    font-weight: 900;
+    background-color:#FFC80A; ;
+    box-shadow: 8px 8px;
+    height: 40px;
+}
+
+.second_1_3{
+  height: 40%;
+  width: 30%;
+  margin-left: 97px;
+  margin-top: 45px;
+  background-color:   #ddc98b;
+  padding: 10px 15px;
+}
+
+.second_2{
+    /* border: 2px solid black; */
+    width:50%;
+    margin-top: 15px;
+}
+
+.second_2_1{
+    /* border: 2px solid black; */
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    color: black;
+    background-color: #FC7F3A;
+    margin-left: 305px;
+    margin-top: 65px;
+    position: relative;
+    z-index: 2;
+}
+
+.second_2_1_txt{
+    padding-left: 15px;
+    margin-top: -40px;
+    margin-left: 25px;
+}
+
+.second_2_2{
+    /* border: 2px solid black; */
+    height: 200px;
+    width: 200px;
+    color: black;
+    background-color: #FFBB38;
+    border-top-right-radius:50% ;
+    border-bottom-right-radius: 50%;
+    margin-left: 207px;
+    margin-top: -65px;
+}
+.second_2_2_txt{
+    padding-left: 15px;
+    margin-top: -35px;
+    margin-left: 60px;
+}
+
+.second_2_3{
+    /* border: 2px solid black; */
+    height: 200px;
+    width: 200px;
+    color: white;
+    background-color: #389B48;
+    margin-left: 82px;
+  margin-top: -37px;
+}
+
+.second_2_3_txt{
+    padding-left: 13px;
+    margin-top: -207px;
+    margin-left: 13px;
+  }
+
+
+/* banner section   */
+.banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+    margin-top: 100px;
+    background-color: black;
+}
+
+.banner_cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width:30%;
+}
+
+.banner_cont_main{
+    width: 80%;
+    margin-left: 30px;
+}
+
+.banner_cont_img{
+    width: 20%;
+}
+
+.banner_pipe{
+    width: 5%;
+    color: #FC7F3A;
+    
+}
+
+/* third section */
+.third_head_1{
+    width: 10%;
+    margin-left: 625px;
+    background-color: #FC7F3A;
+    border-radius: 15px;
+    color: #F9F7EE;
+    margin-top: 90px;
+}
+
+.thirdmain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.thirdcard{
+    height: 625px;
+    width: 31%;
+    margin-right: 3%;
+    border-radius: 15px;
+    background-color: #EBE9DE;
+}
+
+
+.card_cont_1{
+    font-size: 21px;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 73px;
+    margin-left: -15px;
+}
+
+.card_cont_2{
+  font-size: 38px;
+  margin-left: 99px;
+  font-weight: 900;
+}
+
+.card_cont_3{
+    margin-left: 52px;
+    margin-top: -35px;
+}
+
+.card_cont_4{
+  width: 38%;
+  font-size: 18px;
+  height: 8%;
+  margin-left: 122px;
+  margin-top: 20px;
+  background-color: #389B48;
+  border: 1px solid black;
+  font-weight: 900;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 5px 5px black;
+}
+
+.card_cont_3_2{
+    margin-left: 121px;
+  margin-top: -55px;
+}
+
+/* fourthsection */
+.fourth_head_1{
+    width: 10%;
+    margin-left: 625px;
+    background-color: rgba(0, 0, 255,0.67);
+    border-radius: 15px;
+    color: #F9F7EE;
+    margin-top: 90px;
+}
+
+.fourthmain{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+.fourth_card{
+ width: 48%;
+ margin-right: 2%;
+ height: 940px;
+ /* border: 2px solid black; */
+}
+
+.fourth_card_2{
+    width: 30%;
+    border-radius: 50px;
+    border: 2px solid black;
+    margin-top: 50px;
+    margin-left: 20px;
+}
+
+.fourth_card_btn{
+    margin-top: 132px;
+    margin-left: 185px;
+} 
+
+/* fifthsection */
+.fifthsection{
+    margin-top: 80px;
+}
+
+.fifthmain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fifthcard{
+    height: 625px;
+    width: 31%;
+    margin-right: 3%;
+    border-radius: 15px;
+    background-color: #EBE9DE;
+}
+
+.fifth_card_cont_1{
+    font-size: 21px;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 73px;
+    margin-left: -15px;
+}
+
+.fifth_card_cont_2{
+  font-size: 38px;
+  margin-left: 120px;
+  font-weight: 900;
+}
+
+.fifth_card_btn{
+  width: 80%;
+  height: 40px;
+  margin-left: 38px;
+  background-color: #FFBB38;
+  font-size: 18px;
+  font-weight: 900;
+  border-radius: 10px;
+  margin-top: 30px;
+}
+
+.fifthcard:hover{
+    background-color: black;
+    transform: translateY(-20px);
+    p{
+        color: white;
+    }
+    hr{
+        color: white;
+    }
+}
+
+/* sixthsection */
+.sixthsection{
+    margin-top: 80px;
+    height: 650px;
+    background-color: #64E379;
+    display: flex;
+}
+.sixthmain{
+  display: flex;
+}
+.sixthdemo{
+    display: flex;
+    overflow-x: auto;
+    /* overflow-x: hidden; */
+}
+.sixthsec_img{
+  border-top-left-radius: 50%;
+  border-top-right-radius: 50%;
+  margin-left: 100px;
+  margin-top: 125px;
+  border: 3px solid black;
+  width: 330px;
+}
+
+.sixth_head_2{
+    border: 2px solid;
+    width: 156px;
+    border-radius: 50px;
+    background-color: #FFC80A;
+    height: 68px;
+    margin-left: 185px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 2;
+}
+
+.sixthsectiontxt{
+    min-width: 60%;
+    margin-left: 30px;
+    padding-top: 255px;
+    padding-left: 18px;
+}
+
+/* seventh section */
+
+.seven_head_1{
+    background-color: rgba(153, 50, 204,0.7);
+    color: #F9F7EE;
+    width: 7%;
+    margin-top: 50px;
+    border-radius: 50px;
+    height: 32px;
+}
+
+
+.sevenmain{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px; 
+  }
+  .seven_card{
+   width: 48%;
+   margin-right: 2%;
+   height: 760px;
+  }
+  
+  .seven_card_2{
+    width: 30%;
+    border-radius: 50px;
+    border: 2px solid black;
+    margin-top: 50px;
+    margin-left: 20px;
+    
+  }
+
+  /* eight section */
+.eightsection{
+    background-color: #FFBB38;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+.form_div{
+    width: 55%;
+    padding: 30px 10px 30px 140px;
+}
+
+.form_con{
+    width: 45%;
+    padding: 20px 50px 20px 0px;
+}
+
+.form_div input[type=text]{
+    display: block;
+    border: none;
+    border-bottom:2px solid black ;
+    height: 40px;
+    width: 70%;
+    background-color: #FFBB38;
+    margin-bottom: 20px;
+}
+
+.form_div ::placeholder{
+    color: black;
+    opacity: 1;
+    font-size: 30px;
+}
+
+.banner2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110px;
+    margin-top: 0px;
+    background-color: black;
+}
+
+.banner_cont{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:30%;
+}
+
+.banner_cont_main{
+    width: 90%;
+    margin-left: 30px;
+}
+
+.banner_pipe{
+    width: 5%;
+    color: #FC7F3A;
+    
+}
+
+/* ninethsection */
+.ninethsection{
+    height: 80%;
+}
+
+.footermain{
+    display: flex;
+    justify-content: space-evenly;
+}
+

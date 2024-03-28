@@ -4,7 +4,7 @@ var conn = mysql.createConnection({
   host: "localhost",
   user: "root",
   password: "root",
-  database:"user_details"
+  database:"main"
 });
 
 conn.connect(function(err) {
@@ -17,3 +17,4 @@ conn.connect(function(err) {
 });
 
 module.exports={conn}
+

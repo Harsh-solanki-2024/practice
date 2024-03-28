@@ -1,19 +1,42 @@
-const express = require('express')
+const express = require('express');
 const app = express()
 var fs = require("fs");
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 const port = 3050;
 const ShortUniqueId = require('short-unique-id');
 const coni = require("./database/data_config")
 var md5 = require('md5');
+const pagination = require("./Controllers/pagination.js");
+const delimeter = require('./Controllers/delimeter_search.js');
+const json_task = require("./Controllers/json_task.js");
+const attendance_task = require("./Controllers/attendance_master.js");
+const result_master_task = require("./Controllers/result_master.js");
+const job_appli_ajax = require('./Controllers/job_appli_ajax.js');
+const simple_job_application = require("./Controllers/Crud_job_form.js");
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
+const verify = require('./middleware.js');
 
 const uid = new ShortUniqueId();
 
-var lastid, str, str2;
+var lastid, str, str2,secretkey=process.env.SECRET_KEY;
 
 app.set('view engine', 'ejs')
+app.use(express.static('public'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser());
+app.use(pagination);
+app.use(delimeter);
+app.use(json_task);
+app.use(attendance_task);
+app.use(result_master_task);
+app.use(job_appli_ajax);
+app.use(simple_job_application);
+
+
+
 
 
 const executequery = (str) => {
@@ -27,56 +50,13 @@ const executequery = (str) => {
   })
 }
 
-app.get("/Home", (req, res) => {
+app.get("/Home", verify,(req, res) => {
   res.render("main");
 })
 
-//11 exercise
-
-app.get("/1_dynamic_table", (req, res) => {
-  res.render("1_dynamic_table");
+app.get("/clock",async (req,res)=>{
+  res.render('clock');
 })
-
-app.get("/2_Kuku_cube", (req, res) => {
-  res.render("2_cube_table_game");
-})
-
-app.get("/3_tic_tac_toe", (req, res) => {
-  res.render("3_tic_tac_toe");
-})
-
-app.get("/4_sorting", (req, res) => {
-  res.render("4_sorting");
-})
-
-app.get("/5_",(req,res)=>{
-
-})
-
-app.get("/6",(req,res)=>{
-
-})
-
-app.get("/7",(req,res)=>{
-
-})
-
-app.get("/8",(req,res)=>{
-
-})
-
-app.get("/9",(req,res)=>{
-
-})
-
-app.get("/10",(req,res)=>{
-
-})
-
-app.get("/11",(req,res)=>{
-
-})
-
 
 
 
@@ -97,6 +77,8 @@ app.get("/checkemail/:email", async (req, res) => {
   res.send(exist);
 
 })
+
+
 
 app.get("/", async (req, res) => {
   res.render('index');
@@ -119,7 +101,7 @@ app.post("/login", async (req, res) => {
 
     if (result[0].counter == 1) {
 
-      q = `select pw_salt,password from user_registration where email='${body.email}';`
+      q = `select id,pw_salt,password from user_registration where email='${body.email}';`
 
       result2 = await executequery(q);
 
@@ -128,6 +110,12 @@ app.post("/login", async (req, res) => {
       var str = md5(body.password + salt);
 
       if (str == result2[0].password) {
+        const token = jwt.sign({id:result2[0].id},secretkey, {
+          expiresIn: '1h' 
+        });
+        res.cookie('token',token, {
+          maxAge: 3600 * 1000,
+        });
         res.send({ msg: "login successfully" });
 
       }
