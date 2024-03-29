@@ -117,7 +117,6 @@ app.post("/login", async (req, res) => {
           maxAge: 3600 * 1000,
         });
         res.send({ msg: "login successfully" });
-
       }
       else {
         res.send({ msg: "Invalid creditianals" });

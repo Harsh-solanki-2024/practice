@@ -81,8 +81,9 @@ router.get("/pagination", (req, res) => {
 router.post("/pagination", (req, res) => {
 
     search = req.body.searchId
+  
 
-    q =`SELECT * FROM student_master WHERE Id=${search}`
+    q =`SELECT * FROM student_master WHERE Id='${search}'`
 
     con.query(q, (err, resQuery) => {
         if (err) throw err;
@@ -91,12 +92,14 @@ router.post("/pagination", (req, res) => {
             res.render('../views/pagination/index',{resQuery , currentpage:page,recordsperpage , len , url:"/pagination",msg:"Not valid Id"});
         }
         else if(resQuery.length == 1){
-        res.render('../views/pagination/index', { resQuery, currentpage: page, recordsperpage, len, url: "/pagination" ,msg:""})
+        res.render('../views/pagination/index', { resQuery, currentpage: page, recordsperpage, len, url:"/pagination" ,msg:""})
         }
         else{
             res.redirect("/pagination");
         }
     })
+  
+ 
 })
 
 router.post("/pagination/all", (req, res) => {
