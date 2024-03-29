@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        .mainbtns{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .SearchBar {    
+                height: 100px;
+                width: 90px;
+                margin-left: 600px;
+            }
+            #search{
+                  width: 300px;
+                  height: 50px;
+            }
+        </style>
+</head>
+<body>
+    <div class="SearchBar">
+        <form action="/dynamic" method="post">
+             <input type="search" placeholder="Search..." id="search" name="search" required>
+             <input type="submit" value="Get">
+        </form>
+    </div>
+    <center>
+      <p>just type query in the input box ex: select * from student_master</p>
+      <p>and also for sorting just click the header of any column</p>
+    </center>
+</body>
+</html>

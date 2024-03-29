@@ -17,6 +17,8 @@ const simple_job_application = require("./Controllers/Crud_job_form.js");
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const verify = require('./middleware.js');
+const dynamic_query = require('./Controllers/dynamic_grid_query_with_sorting.js');
+const simple = require ('./Controllers/simple_grid_with_pagination_and_also_sorting.js');
 
 const uid = new ShortUniqueId();
 
@@ -28,12 +30,14 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser());
 app.use(pagination);
+app.use(dynamic_query);
 app.use(delimeter);
 app.use(json_task);
 app.use(attendance_task);
 app.use(result_master_task);
 app.use(job_appli_ajax);
 app.use(simple_job_application);
+app.use(simple);
 
 
 

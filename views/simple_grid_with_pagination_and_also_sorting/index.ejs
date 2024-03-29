@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        .mainbtns{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        </style>
+</head>
+<body>
+    <div class="mainbtns">
+        <% if(no==1) { %>
+            <a href="/first"><input type="button" value="<<" disabled></a>
+            <a href="/prev"><input type="button" value="<" disabled></a>
+       
+        <% } else { %>
+            <a href="/simple/first"><input type="button" value="<<"></a>
+            <a href="/simple/prev"><input type="button" value="<"></a>
+        <% } %>
+        
+        <div class="childbtn">
+          <p><%=no%></p>
+        </div>
+        <% if(no==500) { %>
+        <a href="/next"><input type="button" value=">" disabled></a>
+        <a href="/last"><input type="button" value=">>" disabled></a>
+        <% } else { %>
+            <a href="/simple/next"><input type="button" value=">"></a>
+            <a href="/simple/last"><input type="button" value=">>"></a>
+        <% } %>
+       </div>
+    
+    <table>
+        <tr>
+            <th>Id <br>
+            <a href="/?id=Id">sort by asc</a></th>
+            <th>Firstname <br>
+                <a href="/?id=FirstName">sort by asc</a>
+            </th>
+            <th>Lastname <br>
+                <a href="/?id=LastName">sort by asc</a>
+            </th>
+            <th>email <br>
+                <a href="/?id=email">sort by asc</a>
+            </th>
+            <th>Age <br>
+                <a href="/?id=Age">sort by asc</a></th>
+            <th>City <br>
+                <a href="/?id=City">sort by asc</a>
+            </th>
+            <th>MobNo <br>
+                <a href="/?id=MobNo">sort by asc</a></th>
+            <th>Gender <br>
+                <a href="/?id=Gender">sort by asc</a></th>
+            <th>DOB <br>
+                <a href="/?id=DOB">sort by asc</a></th>
+            <th>IQ <br>
+                <a href="/?id=IQ">sort by asc</a></th>
+          </tr>
+          <% result.forEach(function(user) { %>
+            <tr>
+              <td><%=user.Id%></td>
+              <td><%=user.FirstName%></td>
+              <td><%=user.LastName%></td>
+              <td><%=user.email%></td>
+              <td><%=user.Age%></td>
+              <td><%=user.City%></td>
+              <td><%=user.MobNo%></td>
+              <td><%=user.Gender%></td>
+              <td><%=user.DOB%></td>
+              <td><%=user.IQ%></td>
+            </tr>
+            <% }); %>
+         </table>
+        
+</body>
+</html>
+
