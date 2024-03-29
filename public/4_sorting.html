@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #demo{
+        font-size: 30px;
+    }
+</style>
+<body>
+    <center>
+        <h1>Harsh Solanki</h1>
+        <h1>05-feb</h1>
+        <h1>24DEV033</h1>
+      </center>
+
+
+      <br>
+      <br>
+      <br>
+
+      <center><h1>Please open the console to show the functionality</h1></center>
+    <p id="demo">
+
+    </p>
+    <script>
+        function swap(arr, a, b) {
+            var temp = arr[a];
+            arr[a] = arr[b];
+            arr[b] = temp;
+        }
+
+        //bubble-sort
+        function bubbleSortAlgo(arraaytest) {
+            var len = arraaytest.length,
+                i, j;
+            for (i = 0; i < len; i++) {
+                for (j = 0; j < len - i; j++) { 
+                    if (arraaytest[j] > arraaytest[j + 1]) {
+                        swap(arraaytest, j, j + 1);
+                    }
+                }
+            } return arraaytest;
+        }
+       
+        console.log("1.bubble sort");
+        console.log("before the sort array is [3, 6, 2, 5, -75, 4, 1]");
+        console.log(bubbleSortAlgo([3, 6, 2, 5, -75, 4, 1]));
+
+        //selection-sort
+
+        function selectionSort(array) {
+            const size = array.length;
+            for (let step = 0; step < size - 1; step++) {
+                let min_idx = step;
+                for (let i = step + 1; i < size; i++) {
+                    if (array[i] < array[min_idx])
+                        min_idx = i;
+                }
+                swap(array, min_idx, step);
+            } return array;
+        }
+    
+        console.log("2.selection_sort");
+        console.log("before the sort array is [3, 6, 2, 5, -75, 4, 1]");
+        console.log(selectionSort([3, 6, 2, 5, -75, 4, 1]));
+
+        //insertion sort
+        function insertionSort(array) {
+            const size = array.length;
+            for (let step = 1; step < size; step++) {
+                let key = array[step];
+                let j = step - 1;
+
+                while (key < array[j] && j >= 0) {
+                    array[j + 1] = array[j];
+                    --j;
+                }
+                array[j + 1] = key;
+            }
+            return array;
+        }
+        
+        console.log("3.insertion_sort");
+        console.log("before the sort array is [3, 6, 2, 5, 4, 1]");
+        console.log(insertionSort([3, 6, 2, 5, 4, 1]));
+
+        //quick-sort
+        function partition(arr, start, end) {
+            let pivot = arr[start];
+            let count = 0;
+            for (let i = start + 1; i <= end; i++) {
+                if (arr[i] <= pivot)
+                    count++;
+            }
+
+            let pivotIndex = start + count;
+            [arr[pivotIndex], arr[start]] = [arr[start], arr[pivotIndex]];
+
+            let i = start, j = end;
+            while (i < pivotIndex && j > pivotIndex) {
+                while (arr[i] <= pivot) {
+                    i++;
+                }
+                while (arr[j] > pivot) {
+                    j--;
+                }
+                if (i < pivotIndex && j > pivotIndex) {
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                    i++;
+                    j--;
+                }
+            }
+            return pivotIndex;
+        }
+
+        function quickSort1(arr, start, end) {
+            if (start >= end)
+                return;
+
+            let p = partition(arr, start, end);
+
+            quickSort1(arr, start, p - 1);
+
+            quickSort1(arr, p + 1, end);
+
+            return arr;
+        }
+        let arr2 = [3, 6, 2, 5, 4, 1];
+        let N = arr2.length;
+        console.log("4.quick-sort");
+        console.log("before the sort array is [3, 6, 2, 5, 4, 1]");
+        console.log(quickSort1(arr2, 0, N - 1));
+       
+        //compare function
+
+        console.log("this is the inbulit function of javascript");
+        const points = [40, 100, 1, 5, 25, 10];
+        console.log("before the sort array is [40, 100, 1, 5, 25, 10]   ");
+         console.log(points.sort(function(a, b){return a > b}));
+    </script>
+</body>
+
+</html>

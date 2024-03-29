@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .main{
+        display: flex;
+        gap: 0px;
+      }
+      .main > input{
+        height: 70px;
+        font-size: larger;
+        background-color: rgb(48, 141, 141);
+      }
+      .buttons{
+        display: flex;
+      }
+      .error_msg,
+        .date_check,
+        .number_check_err,
+        .combo_box,
+        .year_check,
+        .email_error,
+        .allfield_error,
+        .percen_err,
+        .checkbox_err,
+        .dropdown_err,
+        .checkbox_radio_err,
+        .education_field_error,
+        #email_error,
+        #msg{
+            color: rgb(209, 5, 5);
+            font-size: small;
+        }
+    </style>
+</head>
+<body>
+    <p id="msg"></p>
+    <p id="msg2"></p>
+    <% var result=result || null;
+       var result2=result2 || null;
+       var result3=result3 || null;
+       var result4=result4 || null;
+       var result5=result5 || null;
+       var result6=result6 || null;
+       var result7=result7 || null;
+       %>
+    <h1>EMPLOYEE_DETAILS_FORM</h1>
+    <!-- <div class="main">
+      <input type="button" value="basic_detail >>" onclick="just_table(0)">
+
+      <input type="button" value="education_detail >>" onclick="just_table(1)">
+
+      <input type="button" value="work_experience >>" onclick="just_table(2)">
+
+      <input type="button" value="language_check >>" onclick="just_table(3)">
+
+      <input type="button" value="technology_check >>" onclick="just_table(4)">
+
+      <input type="button" value="references >>" onclick="just_table(5)">
+
+      <input type="button" value="preferences >>" onclick="just_table(6)">
+    </div> -->
+
+    <div>
+      <form action="/job_application_form/regorup" method="post" id="form" name="form" >
+         <fieldset id="basic_detail" class="form-section active">
+            <h2>Basic_Details</h2>
+            <table >
+                <tr>
+                    <td>
+                        <input type="hidden" id="basic_id" name="id" >
+                        <label for="first_name">First_Name:<span style="color:red;">*</span></label>
+                        <input type="text" name="first_name" id="first_name" 
+                            placeholder="first_name" tabindex="1" autofocus>
+                        <span class="error_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="last_name">Last_name:<span style="color:red;">*</span></label>
+                        <input type="text" name="last_name" id="last_name" 
+                            placeholder="last_name" tabindex="2">
+                        <span class="error_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="designation">Designation:<span style="color:red;">*</span></label>
+                        <input type="text" name="designation" id="designation"
+                            tabindex="3" placeholder="designation">
+                        <span class="error_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="address">address:<span style="color:red;">*</span></label>
+                        <input type="" name="address" id="address" 
+                            style="width: 300px;" tabindex="4">
+                        <span class="error_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">email:<span style="color:red;">*</span></label>
+                        <input type="text" name="email" id="email" tabindex="5">
+                        <span class="error_msg"></span>
+                        <span id="email_error"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="state">State:</label>
+
+                        <select id="state" name="state" tabindex="6">
+                            <option value="default">-select state</option>
+                            <% var options=[ "Gujarat" , "maharashtra" , "Goa" , "Bihar" ]; var selected=""; for ( var i=0; i <
+                                options.length; i++ ){ %>
+                                <option value="<%=options[ i ] %>"><%=options[i] %>
+                                </option>
+                                <% } %>
+
+                        </select>
+
+                        <span class="dropdown_err"></span>
+
+                        <label for="city">City:</label>
+                        <input type="text" name="city" id="city" tabindex="7">
+                        <span class="error_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="phone_no">Phone Number:<span style="color:red;">*</span></label>
+                        <input type="text" name="phone_number" id="phone_no" 
+                            tabindex="8">
+                        <span class="error_msg"></span>
+                        <span class="number_check_err"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="gender" id="gender">gender:</label>
+                        <span class="combo_box"></span>
+                                <input type="radio" name="_gender" id="male" value="m" tabindex="9">male
+                                <input type="radio" name="_gender" id="female" value="f">female
+                                <input type="radio" name="_gender" id="other" value="o">others
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="zip_code">Zip_code:</label>
+                        <input type="text" name="Zip_code" id="zip_code" tabindex="10">
+                        <span class="error_msg"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td id="relationship_status">
+                        <label for="relationship_status" id="relationship_status">Relationship_status: </label>
+                        <span class="combo_box"></span>
+                                <input type="radio" name="relationship_status" id="Relationship_status_single"
+                            value="single" tabindex="11">single
+                            <input type="radio" name="relationship_status" id="Relationship_status_married"
+                            value="married">married
+                           
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="dob">Date of Birth:<span style="color:red;">*</span></label>
+                        <input type="text" name="DOB" id="dob" placeholder="YYYY-MM-DD" tabindex="12">
+                        <span class="error_msg"></span>
+                        <p class="date_check"></p>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+
+        <fieldset id="education_detail" class="form-section"> 
+            <h2>Education_Details</h2>
+            <table>
+                <tr>
+                    <td>
+                        <label for="ssc_details">ssc_result:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="education_field_error"></span>
+                        <label for="for_of_board">Name Of board:</label>
+                        <input type="text" name="name_board" id="ssc_name_of_board" >
+                        <span class="error_msg"></span>
+                        <label for="Passing_year">Passing year:</label>
+                        <input type="text" name="passing_year" id="ssc_passing_year" >
+                        <span class="error_msg"></span>
+                        <span class="year_check"></span>
+                        <label for="percentage">percentage:</label>
+                        <input type="text" name="percentage" id="ssc_percentage">
+                        <span class="error_msg"></span>
+                        <span class="percen_err"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="hsc_details">HSC/Diploma_result:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="education_field_error"></span>
+                        <label for="name_of_board">Name Of board:</label>
+                        <input type="text" name="name_board" id="hsc_name_of_board">
+                        <span class="error_msg"></span>
+                        <label for="Passing_year">Passing year:</label>
+                        <input type="text" name="passing_year" id="hsc_passing_year" >
+                        <span class="error_msg"></span>
+                        <span class="year_check"></span>
+                        <label for="percentage">percentage:</label>
+                        <input type="text" name="percentage" id="hsc_percentage" >
+                        <span class="error_msg"></span>
+                        <span class="percen_err"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Bachelor_degree">Bachelor_degree:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="education_field_error"></span>
+                        <label for="course_name">course_name:</label>
+                        <input type="text" name="name_board" id="bachelor_course_name" >
+                        <span class="error_msg"></span>
+                        <label for="Passing_year">Passing_year:</label>
+                        <input type="text" name="passing_year" id="bachelor_passing_year" >
+                        <span class="error_msg"></span>
+                        <span class="year_check"></span>
+                        <label for="percentage">percentage:</label>
+                        <input type="text" name="percentage" id="bachelor_percentage" >
+                        <span class="error_msg"></span>
+                        <span class="percen_err"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="f_name">master_degree:</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="education_field_error"></span>
+                        <label for="course_name">course_name:</label>
+                        <input type="text" name="name_board" id="master_course_name" >
+                        <span class="error_msg"></span>
+                        <label for="Passing_year">Passing_year:</label>
+                        <input type="text" name="passing_year" id="master_passing_year" >
+                        <span class="error_msg"></span>
+                        <span class="year_check"></span>
+                        <label for="percentage">percentage:</label>
+                        <input type="text" name="percentage" id="master_percentage"  >
+                        <span class="error_msg"></span>
+                        <span class="percen_err"></span>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+    </fieldset>
+    <fieldset id="company_table" class="form-section">
+        <h2>Work_experience</h2>
+        <table >
+            <tr>
+                    <td>
+                        <span class="allfield_error"></span>
+                        <label for="company_name">company_name:</label>
+                        <input type="text" name="company" id="company_name_1" >
+                        <label for="designation">designation:</label>
+                        <input type="text" name="designation2" id="designation_1"  >
+                        <label for="From">From:</label>
+                        <input type="text" name="From" id="From_1" placeholder="YYYY-MM-DD"  >
+                        <span class="date_check"></span>
+                        <label for="To">To:</label>
+                        <input type="text" name="To" id="To_1" placeholder="YYYY-MM-DD" >
+                        <span class="date_check"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="allfield_error"></span>
+                        <label for="company_name">company_name:</label>
+                        <input type="text" name="company" id="company_name_1" >
+                        <label for="designation">designation:</label>
+                        <input type="text" name="designation2" id="designation_1" >
+                        <label for="From">From:</label>
+                        <input type="text" name="From" id="From_1" placeholder="YYYY-MM-DD">
+                        <span class="date_check"></span>
+                        <label for="To">To:</label>
+                        <input type="text" name="To" id="To_1" placeholder="YYYY-MM-DD"  >
+                        <span class="date_check"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="allfield_error"></span>
+                        <label for="company_name">company_name:</label>
+                        <input type="text" name="company" id="company_name_1">
+                        <label for="designation">designation:</label>
+                        <input type="text" name="designation2" id="designation_1" >
+                        <label for="From">From:</label>
+                        <input type="text" name="From" id="From_1" placeholder="YYYY-MM-DD" >
+                        <span class="date_check"></span>
+                        <label for="To">To:</label>
+                        <input type="text" name="To" id="To_1" placeholder="YYYY-MM-DD" >
+                        <span class="date_check"></span>
+                    </td>
+                </tr>
+        </table>
+    </fieldset>
+    <fieldset id="language_table" class="form-section">
+        <h2>language_table</h2>
+         <table> 
+            <tr>
+                    <td>
+                        <span class="checkbox_err"></span>
+                        <label for="hindi">Hindi</label>
+                        <input type="checkbox" name="language" id="hindi" value="hindi" >:
+                        <label for="read">read</label>
+                        <input type="checkbox" name="hindi" id="read_1" value="read" >
+                        <label for="write">write</label>
+                        <input type="checkbox" name="hindi" id="write_1" value="write" >
+                        <label for="speak">speak</label>
+                        <input type="checkbox" name="hindi" id="speak_1" value="speak" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="checkbox_err"></span>
+                        <label for="English">English</label>
+                        <input type="checkbox" name="language" id="English" value="English">:
+                        <label for="read">read</label>
+                        <input type="checkbox" name="English" id="read_2" value="read" >
+                        <label for="write">write</label>
+                        <input type="checkbox" name="English" id="write_2" value="write">
+                        <label for="speak">speak</label>
+                        <input type="checkbox" name="English" id="speak_2" value="speak"  >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="checkbox_err"></span>
+                        <label for="Gujarati">Gujarati</label>
+                        <input type="checkbox" name="language" id="Gujarati" value="Gujarati"  >:
+                        <label for="read">read</label>
+                        <input type="checkbox" name="Gujarati" id="read_3" value="read" >
+                        <label for="write">write</label>
+                        <input type="checkbox" name="Gujarati" id="write_3" value="write" >
+                        <label for="speak">speak</label>
+                        <input type="checkbox" name="Gujarati" id="speak_3" value="speak"  >
+                    </td>
+                </tr>
+         </table>
+     </fieldset>
+     <fieldset id="technology_table" class="form-section">
+        <h2>Technologies</h2>
+        <table>
+            <tr>
+                    <td>
+                        <span class="checkbox_radio_err"></span>
+                        <label for="PHP">PHP:</label>
+                        <input type="checkbox" name="technology" id="PHP" value="PHP"  >:
+                        <label for="beginner">Beginner</label>
+                        <input type="radio" name="PHP" id="beginner" value="beginner"  >
+                        <label for="mideator">mideator</label>
+                        <input type="radio" name="PHP" id="mideator" value="mideator"   >
+                        <label for="expert">expert</label>
+                        <input type="radio" name="PHP" id="expert" value="expert" >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="checkbox_radio_err"></span>
+                        <label for="Mysql">Mysql:</label>
+                        <input type="checkbox" name="technology" id="Mysql" value="Mysql"  >:
+                        <label for="beginner">Beginner</label>
+                        <input type="radio" name="Mysql" id="beginner" value="beginner"  >
+                        <label for="mideator">mideator</label>
+                        <input type="radio" name="Mysql" id="mideator" value="mideator" >
+                        <label for="expert">expert</label>
+                        <input type="radio" name="Mysql" id="expert" value="expert">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="checkbox_radio_err"></span>
+                        <label for="Laravel">Laravel:</label>
+                        <input type="checkbox" name="technology" id="Laravel" value="Laravel" >:
+                        <label for="beginner">Beginner</label>
+                        <input type="radio" name="Laravel" id="beginner" value="beginner" >
+                        <label for="mideator">mideator</label>
+                        <input type="radio" name="Laravel" id="mideator" value="mideator"  >
+                        <label for="mideator">mideator</label>
+                        <input type="radio" name="Laravel" id="expert" value="expert"  >
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="checkbox_radio_err"></span>
+                        <label for="Oracle">Oracle:</label>
+                        <input type="checkbox" name="technology" id="Oracle" value="Oracle" >:
+                        <label for="beginner">Beginner</label>
+                        <input type="radio" name="Oracle" id="beginner" value="beginner">
+                        <label for="mideator">mideator</label>
+                        <input type="radio" name="Oracle" id="mideator" value="mideator" >
+                        <label for="expert">expert</label>
+                        <input type="radio" name="Oracle" id="expert" value="expert" >
+                    </td>
+                </tr>
+        </table>
+    </fieldset>
+    <fieldset id="references_table" class="form-section">
+        <h2>Referance_Contact</h2>
+        <table>
+            <tr>
+                    <td>
+                        <label for="name">name:</label>
+                        <input type="text" name="pref_name" id="name" >
+                        <label for="contact_no">contact_no:</label>
+                        <input type="text" name="pref_contact" id="contact_no_1" >
+                        <span class="number_check_err"></span>
+                        <label for="relation">relation:</label>
+                        <input type="text" name="pref_relation" id="relation_1">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="name">name:</label>
+                        <input type="text" name="pref_name" id="name" >
+                        <label for="contact_no">contact_no:</label>
+                        <input type="text" name="pref_contact" id="contact_no_2"   >
+                        <span class="number_check_err"></span>
+                        <label for="relation">relation:</label>
+                        <input type="text" name="pref_relation" id="relation_2" >
+                    </td>
+                </tr>
+        </table>
+    </fieldset>
+    <fieldset id="preferences_table" class="form-section">
+        <h2>Preferance_Table</h2>
+        <table>
+            <tr> 
+                    <td>
+                        <label for="location">Preferd_location:</label>
+                        <select name="location" id="location" multiple>
+                            <option value="0">-select Location</option>
+                            <option value="ahemedabad" >Ahemedabad,Gujarat,IN</option>
+                            <option value="mumbai" >Mumbai,maharashtra,IN</option>
+                            <option value="hyderabad"  >Hyderabad,telagna,IN</option>
+                            <option value="bengaluru" >Bengaluru,Karnataka,IN</option>
+                        </select>
+                        <span class="dropdown_err"></span>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="Notice_period">Notice_period:</label>
+                        <input type="text" name="notice_period" id="Notice_period"  >
+                        <label for="Expected_ctc">Expected_ctc:</label>
+                        <input type="text" name="expected_ctc" id="Expected_ctc"  >
+                        <label for="current_ctc">current_ctc:</label>
+                        <input type="text" name="current_ctc" id="current_ctc"  >
+                    </td>
+                </tr>
+                <tr> 
+                    <td>
+                        <label for="Department">Department:</label>
+
+                        <select for="Department" id="department" name="department">
+                            <option value="0">-select</option>
+                            <option value="it" >IT</option>
+                            <option value="design" >design</option>
+                            <option value="marketing">marketing</option>
+                            <option value="hr">HR</option>
+                        </select>
+                        <span class="dropdown_err"></span>
+
+                    </td>
+                </tr>
+        </table>
+      </fieldset> 
+      </form>
+    </div>
+
+   
+
+    <div class="buttons">
+         <div id="prev">
+        <input type="button" value="prev" onclick="prevbtn()">
+        </div>
+        <div id="next">
+        <input type="button" value="next" onclick="return nextbtn()">
+        </div>
+    </div>
+
+
+    <script>
+        var forms = document.forms['form'];
+
+        var id = window.location.search.slice(4);
+        console.log(id);
+
+        async function ajax_getdata(){
+            var result= await fetch("/id?id="+id);
+            console.log(result);
+            var resultjson = await result.json();
+
+            console.log(resultjson);
+
+            console.log(resultjson.result[0].gender);
+            
+            forms.id.value = resultjson.result[0].basic_id;
+            forms.first_name.value = resultjson.result[0].first_name;
+            forms.last_name.value = resultjson.result[0].last_name;
+            forms.designation.value = resultjson.result[0].designation;
+            forms.address.value = resultjson.result[0].address_1;
+            forms.phone_number.value = resultjson.result[0].phone_number;
+            forms.email.value = resultjson.result[0].email;
+            forms.city.value = resultjson.result[0].city;
+            forms.Zip_code.value = resultjson.result[0].Zip_code;
+            forms.DOB.value = resultjson.result[0].DOB.slice(0,10);
+            forms.relationship_status.value = resultjson.result[0].Relationship_status;
+            forms._gender.value = resultjson.result[0].Gender;
+            forms.state.value = resultjson.result[0].state;
+
+            
+
+           for (let i = 0; i < resultjson.result2.length; i++) {
+             forms.name_board[i].value = resultjson.result2[i].education_course_name;
+             forms.passing_year[i].value = resultjson.result2[i].education_year;
+             forms.percentage[i].value = resultjson.result2[i].percentage;
+           }
+
+           for ( let i=0; i<resultjson.result3.length;i++){
+             forms.company[i].value = resultjson.result3[i].company_name;
+             forms.designation2[i].value = resultjson.result3[i].company_designation;
+             forms.From[i].value = resultjson.result3[i].starting_date.slice(0,10);
+             forms.To[i].value = resultjson.result3[i].ending_date.slice(0,10);
+           }
+
+           for (let i=0;i<resultjson.result4.length;i++){
+               if(resultjson.result4[i].language_name){
+                  forms.language[i].checked = true;
+
+                 var a = resultjson.result4[i].language_name;
+
+                  if(resultjson.result4[i].language_check.includes("read")){
+                      forms[a][1].checked = true; 
+                  }
+
+                  if(resultjson.result4[i].language_check.includes("write")){
+                      forms[a][2].checked = true;
+                  }
+
+                  if(resultjson.result4[i].language_check.includes("speak")){
+                      forms[a][3].checked = true;
+                  }
+               }
+             
+           }
+
+           for(let i=0;i<resultjson.result5.length;i++){
+            if(resultjson.result5[i].technology_name != "undefined" && resultjson.result5[i].technology_name){
+                forms.technology[i].checked = true;
+
+                var a = resultjson.result5[i].technology_name;
+
+                if(resultjson.result5[i].technology_check.includes("beginner")){
+                    forms[a][1].checked= true;
+                }
+
+                if(resultjson.result5[i].technology_check.includes("mideator")){
+                    forms[a][2].checked = true;
+                }
+
+                if(resultjson.result5[i].technology_check.includes("expert")){
+                    forms[a][3].checked = true;
+                }
+
+            }
+
+           }
+
+           for (let i = 0; i< resultjson.result6.length; i++) {
+              forms.pref_name[i].value = resultjson.result6[i].pref_name;
+
+              forms.pref_contact[i].value = resultjson.result6[i].pref_contact;
+
+              forms.pref_relation[i].value = resultjson.result6[i].pref_relation;
+           }
+
+           if(resultjson.result7[0].location.includes("ahemedabad")){
+            forms.location[1].selected = true;
+           }
+
+           if(resultjson.result7[0].location.includes("mumbai")){
+            forms.location[2].selected = true;
+           }
+           
+           if(resultjson.result7[0].location.includes("hyderabad")){
+            forms.location[3].selected = true;
+           }
+
+           if(resultjson.result7[0].location.includes("bengaluru")){
+            forms.location[4].selected = true;
+           }
+
+
+
+           forms.notice_period.value = resultjson.result7[0].notice_period;
+           forms.expected_ctc.value = resultjson.result7[0].expected_ctc;
+           forms.current_ctc.value = resultjson.result7[0].current_ctc;
+           forms.department.value = resultjson.result7[0].department;
+
+        }
+
+        ajax_getdata();
+
+
+
+      var i=0; 
+
+      const contents=document.querySelectorAll(".form-section");
+
+      if(i==0){
+        contents.forEach(element => {
+            element.style.display='none';
+          });
+
+          contents[0].style.display="block";
+      }
+      
+
+
+      
+      function showtable(i){
+
+          contents.forEach(element => {
+            element.style.display='none';
+          });
+
+          contents[i].style.display="block";
+
+          if(i==6){
+            document.getElementById("next").innerHTML=` <input type="button" value="submit" onclick="ajax_post('form')">`
+          } 
+          else{
+            document.getElementById("next").innerHTML=`   <input type="button" value="next" onclick="return nextbtn()">`
+          }
+      }
+
+
+
+      async function ajax_post(id){
+           const form =document.getElementById(id);
+
+           const obj = new URLSearchParams(new FormData(form));
+
+           let res= await fetch("http://localhost:3080/job_appli/regorup",
+           {
+            headers:{
+                'Content-Type':'application/x-www-form-urlencoded'
+            },
+            method: "POST",
+            body:obj
+           }) 
+      }
+
+        function prevbtn(){
+          if(i>0){
+            i--;
+          }
+          showtable(i);
+        }
+
+        function nextbtn(){
+          
+          switch (i) {
+            case 0:
+                if(!basic_detail()){
+                    return false;
+                };
+                break;
+
+            case 1:
+                if(!education_detail()){
+                    return false;
+                }
+                break;
+            case 2: 
+                if(!work_experience()){
+                    return false;
+                }
+                break;   
+            case 3:    
+                if(!language_table()){
+                    return false;
+                }
+                break;
+            case 4: 
+                if(!technology()){
+                    return false;
+                }    
+            default:
+                break;
+          }
+
+          if(i<contents.length-1){
+            i++;
+          }
+
+          if(i==6){
+            document.getElementById("next").innerHTML=` <input type="button" value="submit" onclick="ajax_post('form')">`
+          }
+
+          showtable(i);
+
+          return true;
+        }
+
+        function basic_detail(){
+            var flag=0;
+
+            document.getElementsByClassName("dropdown_err")[0].innerHTML = " ";
+            
+            // // //this is code for require field for form
+            
+            let arr = ["first_name", "last_name", "designation", "address", "email", "city", "phone_no", "zip_code", "dob"]
+            
+            
+            for (var i = 0; i < arr.length; i++) {
+            
+            
+                if (document.getElementById(arr[i]).value.trim() === null || document.getElementById(arr[i]).value.trim() === "") {
+                    document.getElementsByClassName('error_msg')[i].innerHTML = `this field is required `;
+                    document.getElementById(arr[i])
+                    document.getElementById(arr[i]).focus();
+                    flag=1;
+                }
+                else{
+                    document.getElementsByClassName("error_msg")[i].innerHTML = "";
+                }  
+            
+            }
+            
+            if(flag==1){
+                return false;
+            }          
+            
+            
+            // //this code for email validation
+            
+            let email = document.getElementById("email")
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            
+            if (!(email.value.match(mailformat))) {
+                document.getElementById('email_error').innerHTML = "Invalid Email"
+                email.focus();
+                return false;
+            }
+            
+            
+            // //this code for check the mobile number structure
+            
+            let number_check = ["phone_no"];
+            
+            for (var i = 0; i < number_check.length; i++) {
+                if (document.getElementById(number_check[i]).value.length != 10 || isNaN(document.getElementById(number_check[i]).value)) {
+                    document.getElementsByClassName('number_check_err')[i].innerHTML = "Enter the valid Number";
+                    document.getElementById(number_check[i]).focus();
+                    return false;
+                }
+            }
+            
+            
+            
+            // this is code for radio buttons
+            
+            let chk = ["gender", "relationship_status"];
+            let flag2 = false;
+            
+            for (let i = 0; i < chk.length; i++) {
+               
+                let ele=document.getElementById(chk[i]);
+                let arr = document.getElementsByName(chk[i]);
+                for (let j = 0; j < arr.length; j++) {
+                    if (arr[j].checked == true) {
+                        flag2 = true;
+                    }
+                }
+            }
+            if (flag2 == false) {
+                    document.getElementsByClassName('combo_box')[i].innerHTML = `select one option from ${chk[i]}`;
+                    return false;
+            }
+            
+            
+            //this code for the dropdown check
+            
+            var e = document.getElementById("state");
+            var strUser = e.options[e.selectedIndex].value;
+            
+            if (strUser == 0) {
+                document.getElementsByClassName("dropdown_err")[0].innerHTML = "please select the one option"
+                e.focus();
+                return false;
+            }
+ 
+            return true;
+
+        }
+      
+        function education_detail(){
+            //this code for the education_validation
+
+                       for (var i = 0; i < forms['name_board'].length ; i++) {
+                           let a = document.getElementsByName('name_board')[i];
+                           let b = document.getElementsByName('passing_year')[i];
+                           let c = document.getElementsByName('percentage')[i];
+                           if (( a.value.trim() == ""|| b.value.trim() == "" || c.value.trim() == "") && (a.value.trim() != "" || b.value.trim() != "" || c.value.trim()!="")) {
+                             if((a.value.trim() == "" || a.value.trim() ==null)){
+                               document.getElementsByClassName("education_field_error")[i].innerHTML = "please fill all the field related to that field";
+                               
+                             }
+                             if((b.value.trim() == "" || b.value.trim() ==null)){
+                               document.getElementsByClassName("education_field_error")[i].innerHTML = "please fill all the field related to that field";
+                               
+                             }
+                             if((c.value.trim() == "" || c.value.trim() ==null)){
+                               document.getElementsByClassName("education_field_error")[i].innerHTML = "please fill all the field related to that field";
+                               
+                             }
+                             return false;
+                           }
+                       }
+            
+                       // //this code for check the only year 
+            
+                       for (let i = 0; i < form['passing_year'].length; i++) {
+                         let a = document.getElementsByName('passing_year')[i];
+                         if (a.value.length != 4 && isNaN(a.value) && 1980 <= a.value <= 2024) {
+                             document.getElementsByClassName("year_check")[i].innerHTML = `Invalid year`
+                             a.focus();
+                             return false;
+                         }
+                    }
+            
+            
+            
+            // this code for the percentage check
+            
+            // for (let i = 0; i < forms['percentage'].length; i++) {
+            //     let a = document.getElementsByName('percentage')[i];
+              
+            //     if (a.value.length < 2 && (35 <= a.value || a.value <= 100)) {
+            //         document.getElementsByClassName("percen_err")[i].innerHTML = `Invalid marks`;
+            //         a.focus();
+            //         return false;
+            //     }
+            // }
+            
+            return true;
+
+        }
+
+        console.log(forms['company'].length);
+
+        function work_experience(){
+            for (var i = 0; i <forms['company'].length ; i++) {
+              let a = document.getElementsByName('company')[i];
+              let b = document.getElementsByName('designation2')[i];
+              let c = document.getElementsByName('From')[i];
+              let d = document.getElementsByName('To')[i];
+              console.log("hello");
+            
+           
+              if (( a.value.trim() != "" || b.value.trim()!="" || c.value.trim()!="" || d.value.trim()!="")){
+                if((a.value.trim() != "" && b.value.trim()!="" && c.value.trim()!="" && d.value.trim()!="")){
+                    return true;
+                }
+                else{
+                document.getElementById("msg").innerHTML = "please fill all the field related to that field";
+                  console.log("hello");
+                  return false;
+                }
+              } 
+              else{
+                return true;
+              }
+          }
+        
+
+          
+          // // this code for check the full date and format is DD-MM-YYYY
+          
+          
+        //   let date_check = ["dob", "From_1", "To_1", "From_2", "To_2", "From_3", "To_3"];
+          
+        //   for (let i = 0; i < date_check.length; i++) {
+        //       var val = document.getElementById(date_check[i]).value;
+        //       if (val.length != 10) {
+        //           document.getElementsByClassName('date_check')[i].innerHTML = "Invalid date";
+        //           document.getElementById(date_check[i]).focus()
+        //           return false;
+        //       }
+        //       for (let j = 0; j < val.length; j++) {
+        //           if ((j == 2 && val[j] != '-' && val[j] != "/") || (j == 5 && val[j] != '-' && val[j] != '/')) {
+        //               document.getElementById('date_check').innerHTML = "Invalid date";
+        //               document.getElementById(date_check[i]).focus()
+        //               return false;
+        //           }
+        //           else if (j != 2 && j != 5 && isNaN(val[j])) {
+        //               document.getElementById('date_check').innerHTML = "Invalid date";
+        //               document.getElementById(date_check[i]).focus()
+        //               return false;
+        //           }
+        //       }
+        //   }
+          return true;
+
+        }
+
+        function language_table(){
+
+          // // // this code for the checkbox 
+          
+          let checkbox_1 = [["hindi","read_1","write_1","speak_1"],
+                            ["English","read_2","write_2","speak_2"],
+                            ["Gujarati","read_3","write_3","speak_3"]]
+          
+          for (var i = 0; i < checkbox_1.length; i++) {
+              if ((!document.getElementById(checkbox_1[i][0]).checked) && (document.getElementById(checkbox_1[i][1]).checked || document.getElementById(checkbox_1[i][2]).checked || document.getElementById(checkbox_1[i][3]).checked)
+              || (document.getElementById(checkbox_1[i][0]).checked) && (!document.getElementById(checkbox_1[i][1]).checked && !document.getElementById(checkbox_1[i][2]).checked && !document.getElementById(checkbox_1[i][3]).checked)) {
+                  document.getElementsByClassName("checkbox_err")[i].innerHTML = `please fill the checkbox for ${checkbox_1[i][0]}`
+                  return false;
+              }
+          }
+
+          return true;
+
+        }
+
+        function technology(){
+            document.getElementById("msg").innerHTML="";
+          // //this code for the radio and checkbox
+          
+          var checkbox_radio=["PHP","Mysql","Laravel","Oracle"]
+          
+          for(var i=0;i<checkbox_radio.length;i++){
+              var radio=document.querySelector(`input[name='`+checkbox_radio[i]+`']:checked`);
+              var check=document.getElementById(checkbox_radio[i]).checked;
+          
+              if((radio && !check) || (!radio && check)){
+                 document.getElementById("msg").innerHTML="please fill the references of that language";
+                  return false;
+              }
+          }
+
+          return true;
+        }
+
+
+  
+
+    </script>
+</body>
+</html>

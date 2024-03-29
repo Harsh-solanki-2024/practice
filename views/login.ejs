@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        body{
+            background-image: url('/9963629.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .main {
+            display: flex;
+            width: 100%;   
+        }
+
+        .child {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            padding: 200px 0;
+        }
+
+        .text-inputs {
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+
+        <div class="child">
+           
+            <span style="border: 2px solid black; padding: 25px; background-color: bisque; border-radius: 25px;">
+            <form id="form">
+                <h2 style="text-align: center;">Login</h2>
+
+                <p id="msg"></p>
+                <label for="email">Email:</label><br>
+                <input type="text" name="email" class="text-inputs" id="email"><br>
+                <br>
+                <label for="confirm">Password :</label><br>
+                <input type="password" name="password" id="pswd" class="text-inputs"><br>
+                <br>
+                <center> <input type="button" value="Login" onclick="return valid('form')">
+                    <br>
+                    <br>
+                    <a href="/forgotpass">Forget Password ?</a>
+                </center>
+            </form>
+            </span>
+        
+        </div>
+    </div>
+    <script>
+           async function ajax_post(id) {
+            const form = document.getElementById(id);
+
+            const obj = new URLSearchParams(new FormData(form));
+
+            let result = await fetch("http://localhost:3050/login",
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    method: "POST",
+                    body: obj
+                })
+
+             result = await result.json();   
+
+             console.log(result);
+
+             
+             if(result.msg == "login successfully"){
+                window.location.replace("http://localhost:3050/Home");
+             }
+             
+             document.getElementById("msg").innerHTML = result.msg;
+         }
+
+
+        function valid(id){
+            document.getElementById('msg').innerHTML = "";
+            
+            let arr = ["email", "pswd"];
+
+
+            for (var i = 0; i < arr.length; i++) {
+                if (document.getElementById(arr[i]).value.trim() === null || document.getElementById(arr[i]).value.trim() === "") {
+                    document.getElementById('msg').innerHTML = `please fill the field`;
+                    document.getElementById(arr[i])
+                    document.getElementById(arr[i]).focus();
+                    return false;
+                }
+            }
+
+
+
+            // //this code for email validation
+
+            let email = document.getElementById("email");
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+            if (!(email.value.match(mailformat))) {
+                document.getElementById('msg').innerHTML = "Invalid Email"
+                email.focus();
+                return false;
+            }
+
+            ajax_post(id);
+
+            return true;
+        }
+    </script>
+</body>
+</html>

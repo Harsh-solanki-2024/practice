@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td{
+            margin-left: 50%;
+            border: 2px solid black;
+        }
+        button{
+            font-size: 50px;
+        }
+        h1{
+            align-items: center;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+        tr:nth-child(odd)>td:nth-child(even){
+            background-color: aquamarine;
+        }
+        tr:nth-child(even)>td:nth-child(odd){
+            background-color: rgb(244, 107, 244);
+        }
+    </style>
+
+</head>
+<body>
+    <center><h1>Harsh Solanki</h1>  
+        <h1>01-feb </h1>
+        <h1>24DEV033</h1></center>
+    <center><button onclick="addrow()">+row</button>
+    <button onclick="removerow()">-row</button>
+    <button onclick="addcol()">+col</button>
+    <button onclick="delcol()">-col</button></center>
+
+    <table  id="dynamic-table" cellspacing="0" cellpadding="70" align="center">
+        <tr>
+        <td></td>
+        <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>>
+
+<script>
+   function addrow(){
+    var table=document.getElementById("dynamic-table");
+    var rws_count=table.rows.length;
+    var cols=table.rows[0].cells.length;
+    var row=table.insertRow(rws_count.length);
+    var cell;
+    for(var i=0;i<cols;i++){
+        cell=row.insertCell(i);
+    }
+   }   
+   function removerow(){
+    var mytable=document.getElementById("dynamic-table");
+    var rows=mytable.rows.length;
+
+    if(mytable.rows.length > 2){
+        mytable.deleteRow(rows-1);
+    }
+    else{
+        alert("minimum 2 rows");
+    }
+   }
+   function addcol(){
+    var table = document.getElementById('dynamic-table');
+    var row_count=table.rows.length;
+    var col_count=table.rows[0].cells.length
+    var rows=table.rows
+    for (i = 0; i <row_count; i++) {
+        rows[i].insertCell(col_count);
+    }
+   }
+   function delcol(){
+     var table = document.getElementById('dynamic-table');  
+     var row_count = table.rows.length;   
+     var col_count=table.rows[0].cells.length;
+     var row = table.rows; 
+     if(col_count>2) {
+     for (var i = 0; i < row_count; i++) {  
+        row[i].deleteCell(1); 
+        } 
+     }
+     else{
+        alert("minimum 2 columns");
+     }
+   }
+    </script>
+</body>
+</html>

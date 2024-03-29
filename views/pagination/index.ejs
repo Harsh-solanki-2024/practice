@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td, th {
+          border: 2px solid #dddddd;
+          text-align: center;
+          padding: 9px;
+        }
+        
+        .mainbtns{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .SearchBar {    
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+                height: 100px;
+                width: 50px;
+                margin-left: 600px;
+            }
+        #search{
+                  width: 300px;
+                  height: 50px;
+        }
+
+
+        </style>
+</head>
+<body>
+    <h2>Harsh Solanki</h2>
+
+    <div class="SearchBar">
+        <form action="/pagination" method="post">
+            Id: <input type="search" placeholder="Enter Student Id" id="search" name="searchId" required tabindex="0" autofocus> 
+             <input type="submit" value="Get" tabindex="1" >
+        </form>
+    </div>
+  
+    <div class="sub" id="sub1">
+   
+            <form action="/pagination/all" method="post">
+                Name: <input type="search" placeholder="Enter Student Name" id="search with Name" name="searchName" tabindex="2" >
+                          
+                Age: <input type="search" placeholder="Enter Age" id="search with Age" name="searchAge" tabindex="3" > 
+   
+                MobNo: <input type="search" placeholder="Enter MobNo" id="search with MobNo" name="searchMobNo" tabindex="4"> 
+             
+                Email: <input type="search" placeholder="Enter email" id="search with email" name="searchemail" tabindex="5" > 
+                
+                 <input type="submit" value="Get" tabindex="9">
+            </form>
+
+        </div>
+
+
+        <input type="button" value="show more"  onclick="Show()" id="myBtn">
+   
+
+    <div class="mainbtns">
+        <% if(currentpage == 1 ) { %>
+            <a href="#"><input type="button" value="<<" disabled></a>
+            <a href="#"><input type="button" value="<" disabled></a>
+        
+        <% } else { %>
+            <a href="<%=url %>?page=1&len=<%=len%>"><input type="button" value="<<"></a>
+            <a href="<%=url %>?page=<%=currentpage-1%>&len=<%=len %>"><input type="button" value="<"></a>
+        <% } %>
+        
+        <div class="childbtn">
+          <p><%=currentpage%></p>
+        </div>
+        
+        <% if(currentpage*recordsperpage <= len) { %>
+            <a href="<%=url%>?page=<%=++currentpage%>&len=<%=len%>"><input type="button" value=">"></a>
+
+            <% if(len%recordsperpage == 0){ %>
+                    <a href="<%= url %>?page=<%= parseInt(len/recordsperpage)%>&len=<%= len%>"><input type="button" value=">>"></a>
+             <% } else { %>   
+            <a href="<%= url %>?page=<%= parseInt(len/recordsperpage)+1 %>&len=<%= len %>"><input type="button" value=">>"></a>
+            <% } %>
+            
+        <% } else { %>
+            <a href="#"><input type="button" value=">" disabled></a>
+            <a href="#"><input type="button" value=">>" disabled></a>
+        <% } %>
+        </div> 
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>FirstName</th>
+            <th>LastName</th>
+            <th>Age</th>
+            <th>MobNo</th>
+            <th>email</th>
+            <td>Gender</td>
+            <td>DOB</td>
+            <td>IQ</td>
+        </tr>
+        <tr>
+            <p><%=msg%></p>
+          </tr>
+        <% resQuery.forEach(function(user) { %> 
+            <tr>
+                <td><%=user.Id%></td>
+                <td><%=user.FirstName%></td>
+                <td><%=user.LastName%></td>
+                <td><%=user.Age%></td>
+                <td><%=user.MobNo%></td>
+                <td><%=user.email%></td>
+                <td><%=user.Gender%></td>
+                <td><%=user.DOB%></td>
+                <td><%=user.IQ %></td>
+            </tr>
+          <% }); %>
+         
+    </table>
+  <script>
+
+      var btnText = document.getElementById("myBtn");
+      var sub = document.getElementById("sub1");
+      sub.style.display= "none"
+      var c  = 0 ;
+      
+    function Show(){
+        if(c==0)
+        {
+            sub.style.display= "block"
+            btnText.value="showless"
+
+            c=1;
+
+        }
+        else{
+            sub.style.display= "none"
+            btnText.value="show more"
+            c=0;
+
+        }
+    }
+  </script>
+</body>
+</html>

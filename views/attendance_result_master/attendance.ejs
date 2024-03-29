@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        .mainbtns{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+        </style>
+</head>
+<body>
+    <form action="/attendance" method="get">
+    <select name="month" id="month">
+     <option value="12"<% if(month==12){%>selected<%} %>>Dec</option>
+     <option value="1"<% if(month==1){%>selected<%} %>>Jan</option>
+     <option value="2"<% if(month==2){%>selected<%} %>>Feb</option>
+    </select>
+
+    <select name="year" id="year">
+        <option value="2023"<% if(year==2023){%>selected<%} %>>2023</option>
+        <option value="2024"<% if(year==2024){%>selected<%} %>>2024</option>
+       </select>
+       <input type="submit" value="submit">
+    </form>
+
+    <h1>Attendance_Master</h1>
+    <div class="mainbtns">
+        <% if(no==1) { %>
+            <a href="/attendance/first"><input type="button" value="<<" disabled></a>
+            <a href="/attendance/prev"><input type="button" value="<" disabled></a>
+       
+        <% } else { %>
+            <a href="/attendance/first"><input type="button" value="<<"></a>
+            <a href="/attendance/prev"><input type="button" value="<"></a>
+        <% } %>
+        <div class="childbtn">
+          <p><%=no%></p>
+        </div>
+        <% if(no==4) { %>
+        <a href="/next"><input type="button" value=">" disabled></a>
+        <a href="/last"><input type="button" value=">>" disabled></a>
+        <% } else { %>
+            <a href="/attendance/next"><input type="button" value=">"></a>
+            <a href="/attendance/last"><input type="button" value=">>"></a>
+        <% } %>
+       </div>
+    
+                      <table>
+                          <tr>
+                              <th>Id</th>
+                              <th>Firstname</th>
+                              <th>Year</th>
+                              <th>month</th>
+                              <th>total_present</th>
+                              <th>percentage</th>
+                            </tr>
+                            <% result.forEach(function(user) { %>
+                              <tr>
+                                <td><%=user.Id%></td>
+                                <td><%=user.FirstName%></td>
+                                <td><%=user.year%></td>
+                                <td><%=user.month%></td>
+                                <td><%=user.total_present%></td>
+                                <td><%=user.percentage%></td>
+                              </tr>
+                              <% }); %>
+                          </table>
+        
+</body>
+</html>
+
