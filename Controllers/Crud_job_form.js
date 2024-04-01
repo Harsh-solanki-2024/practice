@@ -2,6 +2,7 @@ const router = require('express').Router();
 var fs = require("fs");
 var bodyParser = require('body-parser')
 const port = 3095
+const verify = require('../middleware.js');
 
 var lastid = 0;
 
@@ -31,7 +32,7 @@ const executequery = (str) => {
   })
 }
 
-router.get("/simple", (req, res) => {
+router.get("/simple", verify,(req, res) => {
   res.render('../views/crud_job_form/index');
 })
 

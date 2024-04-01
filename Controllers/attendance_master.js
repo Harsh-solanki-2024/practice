@@ -1,7 +1,9 @@
 const router = require('express').Router();
 var fs = require("fs");
 var bodyParser = require('body-parser')
-const port = 3030
+const port = 3030;
+const verify = require('../middleware.js');
+
 
 
 var mysql = require('mysql');
@@ -27,7 +29,7 @@ var q;
 
 
 
-router.get("/attendance", (req, res) => {
+router.get("/attendance",verify,(req, res) => {
     ct=0;
    
 

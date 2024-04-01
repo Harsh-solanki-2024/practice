@@ -58,7 +58,7 @@ app.get("/Home", verify,(req, res) => {
   res.render("main");
 })
 
-app.get("/clock",async (req,res)=>{
+app.get("/clock",verify,async (req,res)=>{
   res.render('clock');
 })
 
@@ -82,13 +82,15 @@ app.get("/checkemail/:email", async (req, res) => {
 
 })
 
+app.get("/logout",verify,(req,res)=>{
+  res.clearCookie("token").status(200).redirect("/");
+})
 
-
-app.get("/", async (req, res) => {
+app.get("/register", async (req, res) => {
   res.render('index');
 })
 
-app.get("/login", (req, res) => {
+app.get("/", (req, res) => {
   res.render("login");
 })
 

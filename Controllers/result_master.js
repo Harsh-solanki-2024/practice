@@ -2,6 +2,7 @@ const router = require('express').Router();
 var fs = require("fs");
 var bodyParser = require('body-parser')
 const port = 3070
+const verify = require('../middleware.js');
 
 var mysql = require('mysql');
 
@@ -65,7 +66,7 @@ const executequery = (str,x,y) => {
     where student_master.Id= ?`
 
 
-router.get('/result',async (req,res)=>{
+router.get('/result',verify,async (req,res)=>{
 
     var result = await executequery(q1,'terminal',100);
 

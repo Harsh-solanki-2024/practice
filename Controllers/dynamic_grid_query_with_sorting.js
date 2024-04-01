@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const verify = require('../middleware.js');
 
 var mysql = require('mysql');
 
@@ -21,7 +22,7 @@ var page = 1;
 var q, len;
 
 
-router.get("/dynamic", (req, res) => {
+router.get("/dynamic", verify,(req, res) => {
     if (temp == 0) {
         res.render('../views/dynamic_grid_query_with_sorting/index');
         temp++;

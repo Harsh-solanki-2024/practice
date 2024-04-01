@@ -4,6 +4,7 @@ var bodyParser = require('body-parser')
 const port = 3020
 var search, q = `select * from student_master limit 200`;
 var mysql = require('mysql');
+const verify = require('../middleware.js');
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -22,7 +23,7 @@ con.connect(function(err) {
 });
 
 
-router.get("/delimeter", (req, res) => {
+router.get("/delimeter", verify,(req, res) => {
 
     con.query(q, (err, result) => {
           if (err) throw err;

@@ -3,6 +3,7 @@ var fs = require("fs");
 var bodyParser = require('body-parser')
 const port = 3080
 var mysql = require('mysql');
+const verify = require('../middleware.js');
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -33,7 +34,7 @@ const executequery = (str) => {
   })
 }
 
-router.get("/job_application_form", (req, res) => {
+router.get("/job_application_form", verify,(req, res) => {
   res.render('../views/job_appli_ajax/index');
 
 })

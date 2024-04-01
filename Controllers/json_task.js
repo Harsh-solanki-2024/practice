@@ -1,9 +1,10 @@
 const router = require('express').Router();
 var fs = require("fs");
 var bodyParser = require('body-parser')
+const verify = require('../middleware.js');
 
 
-router.get("/json", (req, res) => {
+router.get("/json",  verify,(req, res) => {
   res.render("../views/json_task/index");
 })
 

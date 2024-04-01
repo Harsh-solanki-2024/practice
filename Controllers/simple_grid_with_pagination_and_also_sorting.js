@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 var mysql = require('mysql');
+const verify = require('../middleware.js');
 
 var con = mysql.createConnection({
   host: "localhost",
@@ -22,7 +23,7 @@ let srt=`Id`;
 
 
 
-router.get("/simple",(req,res)=>{
+router.get("/simple",verify,(req,res)=>{
   
   if(temp!=0){
     srt=req.query.id;

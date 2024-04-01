@@ -3,6 +3,7 @@ var fs = require("fs");
 var bodyParser = require('body-parser')
 const port = 3010
 const { dirname } = require('path');
+const verify = require('../middleware.js');
 
 var mysql = require('mysql');
 
@@ -26,7 +27,7 @@ var search,search2,search3,search4;
 
 
 
-router.get("/pagination", (req, res) => {
+router.get("/pagination", verify,(req, res) => {
 
     if(temp==0){
 
