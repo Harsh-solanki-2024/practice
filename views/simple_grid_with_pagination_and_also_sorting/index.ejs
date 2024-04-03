@@ -36,8 +36,8 @@
             <a href="/prev"><input type="button" value="<" disabled></a>
        
         <% } else { %>
-            <a href="/simple/first"><input type="button" value="<<"></a>
-            <a href="/simple/prev"><input type="button" value="<"></a>
+            <a href="/grid/first"><input type="button" value="<<"></a>
+            <a href="/grid/prev"><input type="button" value="<"></a>
         <% } %>
         
         <div class="childbtn">
@@ -47,37 +47,37 @@
         <a href="/next"><input type="button" value=">" disabled></a>
         <a href="/last"><input type="button" value=">>" disabled></a>
         <% } else { %>
-            <a href="/simple/next"><input type="button" value=">"></a>
-            <a href="/simple/last"><input type="button" value=">>"></a>
+            <a href="/grid/next"><input type="button" value=">"></a>
+            <a href="/grid/last"><input type="button" value=">>"></a>
         <% } %>
        </div>
     
     <table>
         <tr>
             <th>Id <br>
-            <a href="/?id=Id">sort by asc</a></th>
+            <a href="/grid/?id=Id">sort by asc</a></th>
             <th>Firstname <br>
-                <a href="/?id=FirstName">sort by asc</a>
+                <a href="/grid/?id=FirstName">sort by asc</a>
             </th>
             <th>Lastname <br>
-                <a href="/?id=LastName">sort by asc</a>
+                <a href="/grid/?id=LastName">sort by asc</a>
             </th>
             <th>email <br>
-                <a href="/?id=email">sort by asc</a>
+                <a href="/grid/?id=email">sort by asc</a>
             </th>
             <th>Age <br>
-                <a href="/?id=Age">sort by asc</a></th>
+                <a href="/grid/?id=Age">sort by asc</a></th>
             <th>City <br>
-                <a href="/?id=City">sort by asc</a>
+                <a href="/grid/?id=City">sort by asc</a>
             </th>
             <th>MobNo <br>
-                <a href="/?id=MobNo">sort by asc</a></th>
+                <a href="/grid/?id=MobNo">sort by asc</a></th>
             <th>Gender <br>
-                <a href="/?id=Gender">sort by asc</a></th>
+                <a href="/grid/?id=Gender">sort by asc</a></th>
             <th>DOB <br>
-                <a href="/?id=DOB">sort by asc</a></th>
+                <a href="/grid/?id=DOB">sort by asc</a></th>
             <th>IQ <br>
-                <a href="/?id=IQ">sort by asc</a></th>
+                <a href="/grid/?id=IQ">sort by asc</a></th>
           </tr>
           <% result.forEach(function(user) { %>
             <tr>

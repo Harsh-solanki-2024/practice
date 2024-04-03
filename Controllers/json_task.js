@@ -1,7 +1,6 @@
 const router = require('express').Router();
-var fs = require("fs");
-var bodyParser = require('body-parser')
-const verify = require('../middleware.js');
+const verify = require('../middlewares/authorization.js');
+
 
 
 router.get("/json",  verify,(req, res) => {
@@ -9,7 +8,7 @@ router.get("/json",  verify,(req, res) => {
 })
 
 router.get("/json/user",(req,res)=>{
-  Id=req.query.userId
+  let Id=req.query.userId
   res.render("../views/json_task/all_detail_user",{id:Id});
 })
 

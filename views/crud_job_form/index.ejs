@@ -550,8 +550,6 @@
             forms.last_name.value = resultjson.result[0].last_name;
             forms.designation.value = resultjson.result[0].designation;
             forms.address.value = resultjson.result[0].address_1;
-
-
         }
 
       var i=0; 
@@ -590,7 +588,7 @@
 
            const obj = new URLSearchParams(new FormData(form));
 
-           let res= await fetch("http://localhost:3080/regorup",
+           let res= await fetch("http://localhost:3050/simple/regorup",
            {
             headers:{
                 'Content-Type':'application/x-www-form-urlencoded'
@@ -616,7 +614,6 @@
                     return false;
                 };
                 break;
-
             case 1:
                 if(!education_detail()){
                     return false;
@@ -635,7 +632,8 @@
             case 4: 
                 if(!technology()){
                     return false;
-                }    
+                } 
+                break;   
             default:
                 break;
           }
@@ -780,20 +778,6 @@
                          }
                     }
             
-            
-            
-            // this code for the percentage check
-            
-            // for (let i = 0; i < forms['percentage'].length; i++) {
-            //     let a = document.getElementsByName('percentage')[i];
-              
-            //     if (a.value.length < 2 && (35 <= a.value || a.value <= 100)) {
-            //         document.getElementsByClassName("percen_err")[i].innerHTML = `Invalid marks`;
-            //         a.focus();
-            //         return false;
-            //     }
-            // }
-            
             return true;
 
         }
@@ -875,9 +859,6 @@
               }
           }
         }
-
-
-  
 
     </script>
 </body>

@@ -510,16 +510,10 @@
         var forms = document.forms['form'];
 
         var id = window.location.search.slice(4);
-        console.log(id);
 
         async function ajax_getdata(){
-            var result= await fetch("/id?id="+id);
-            console.log(result);
+            var result= await fetch("http://localhost:3050/job_application_form/id?id="+id);
             var resultjson = await result.json();
-
-            console.log(resultjson);
-
-            console.log(resultjson.result[0].gender);
             
             forms.id.value = resultjson.result[0].basic_id;
             forms.first_name.value = resultjson.result[0].first_name;
@@ -600,6 +594,7 @@
 
               forms.pref_relation[i].value = resultjson.result6[i].pref_relation;
            }
+           if(resultjson.result7.length!=0){
 
            if(resultjson.result7[0].location.includes("ahemedabad")){
             forms.location[1].selected = true;
@@ -617,12 +612,14 @@
             forms.location[4].selected = true;
            }
 
-
-
            forms.notice_period.value = resultjson.result7[0].notice_period;
            forms.expected_ctc.value = resultjson.result7[0].expected_ctc;
            forms.current_ctc.value = resultjson.result7[0].current_ctc;
            forms.department.value = resultjson.result7[0].department;
+        }
+
+
+
 
         }
 
@@ -668,7 +665,7 @@
 
            const obj = new URLSearchParams(new FormData(form));
 
-           let res= await fetch("http://localhost:3080/job_appli/regorup",
+           let res= await fetch("/job_application_form/regorup",
            {
             headers:{
                 'Content-Type':'application/x-www-form-urlencoded'
@@ -875,15 +872,12 @@
 
         }
 
-        console.log(forms['company'].length);
-
         function work_experience(){
             for (var i = 0; i <forms['company'].length ; i++) {
               let a = document.getElementsByName('company')[i];
               let b = document.getElementsByName('designation2')[i];
               let c = document.getElementsByName('From')[i];
               let d = document.getElementsByName('To')[i];
-              console.log("hello");
             
            
               if (( a.value.trim() != "" || b.value.trim()!="" || c.value.trim()!="" || d.value.trim()!="")){

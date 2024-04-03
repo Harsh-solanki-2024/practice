@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    </style>
+</head>
+
+<body>
+
+            <select name="states" id="states" onchange="cities_change()">
+                <option value="default">-Select State</option>
+                <%result.forEach(element=> {%>
+                    <option value="<%=element.id%>">
+                        <%=element.name%>
+                    </option>
+                    <% });%>
+            </select>
+
+
+
+            <select name="cities" id="cities">
+              <option value="default">-Select City</option>
+            </select>
+
+
+            <script>
+                let states = document.getElementById("states");
+                let cities = document.getElementById("cities");
+                cities.disabled=true;
+
+                function cities_change() {
+                    const xhr = new XMLHttpRequest();
+
+                    if (states.value != "default") {
+                        cities.disabled = false;
+                        id = document.getElementById("states").value;
+                        xhr.open("GET", `/state/get_cities/${id}`);
+
+                        
+
+                        xhr.send();
+
+                        let data,data2;
+
+                        xhr.onload = function () {
+                            data = JSON.parse(xhr.responseText);
+
+                            data.forEach(element => {
+                                data2+=`
+                                <option value="${element.name}">${element.name}</option>
+                                `
+                            });
+                           
+                            cities.innerHTML=data2;
+
+                        };
+                    }
+                    else{
+                        cities.disabled = true;
+                        cities.innerHTML=`<option value="default">-Select City</option>`;
+                    }
+                }
+
+            </script>
+</body>
+
+</html>

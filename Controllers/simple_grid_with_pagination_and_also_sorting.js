@@ -1,96 +1,103 @@
 const router = require('express').Router();
+const connection = require('../database/data_config.js');
+const verify = require('../middlewares/authorization.js');
 
-var mysql = require('mysql');
-const verify = require('../middleware.js');
-
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "root",
-  database:"main"
-});
-
-con.connect(function(err) {
-    if (err) console.log("error");
-});
+let ct = 0, temp = 0, srt = `Id`;
 
 
+router.get("/grid/", verify, (req, res) => {
+  try {
+    if (temp != 0) {
+      srt = req.query.id;
+    }
 
+    connection.conn.query(`select * from student_master ORDER BY ${srt} limit 200 `, (err, result) => {
+      if (err) throw err;
 
-var ct=0;
-let temp=0;
-let srt=`Id`;
+      else {
+        let no = 1;
+        res.render('../views/simple_grid_with_pagination_and_also_sorting/index', { result: result, no: no });
+      }
+    })
 
+    temp++;
 
-
-router.get("/simple",verify,(req,res)=>{
-  
-  if(temp!=0){
-    srt=req.query.id;
+  } catch (error) {
+    res.send(error);
   }
 
-   con.query(`select * from student_master ORDER BY ${srt} limit 200 `,(err,result)=>{
-        if(err) throw err;
 
-        else{
-            let no =1;
-            res.render('../views/simple_grid_with_pagination_and_also_sorting/index',{result:result,no:no});
-        }
-   })
-
-   temp++;
 })
 
-router.get('/simple/first',(req,res)=>{
-    ct=0;
-    con.query("select * from student_master limit 200 offset ?",[ct],(err,result)=>{
-      if(err) throw err;
-  
-      else{
-          let no =1;
-          res.render('../views/simple_grid_with_pagination_and_also_sorting/index',{result:result,no:no});
+router.get('/grid/first', (req, res) => {
+  try {
+    ct = 0;
+    connection.conn.query("select * from student_master limit 200 offset ?", [ct], (err, result) => {
+      if (err) throw err;
+
+      else {
+        let no = 1;
+        res.render('../views/simple_grid_with_pagination_and_also_sorting/index', { result: result, no: no });
       }
-})
-  
+    })
+  } catch (error) {
+    res.send(error);
+  }
+
+
+
 })
 
-router.get('/simple/prev',(req,res)=>{
-    ct-=200;
-    con.query("select * from student_master limit 200 offset ?",[ct],(err,result)=>{
-      if(err) throw err;
-  
-      else{
-          let no = (ct/200)-1;
-          res.render('../views/simple_grid_with_pagination_and_also_sorting/index',{result:result,no:no});
+router.get('/grid/prev', (req, res) => {
+  try {
+    ct -= 200;
+    connection.conn.query("select * from student_master limit 200 offset ?", [ct], (err, result) => {
+      if (err) throw err;
+
+      else {
+        let no = (ct / 200) - 1;
+        res.render('../views/simple_grid_with_pagination_and_also_sorting/index', { result: result, no: no });
       }
-})
-  
-})
+    })
 
-router.get('/simple/next',(req,res)=>{
-  ct+=200;
-  con.query("select * from student_master limit 200 offset ?",[ct],(err,result)=>{
-    if(err) throw err;
+  } catch (error) {
+    res.send(error);
+  }
 
-    else{
-        let no = (ct/200)+1;
-        res.render('../views/simple_grid_with_pagination_and_also_sorting/index',{result:result,no:no});
-    }
-})
 
 })
 
-router.get('/simple/last',(req,res)=>{
-    ct=99800;
-    con.query("select * from student_master limit 200 offset ?",[ct],(err,result)=>{
-      if(err) throw err;
-  
-      else{
-          let no =(ct/200)+1;
-          res.render('../views/simple_grid_with_pagination_and_also_sorting/index',{result:result,no:no});
+router.get('/grid/next', (req, res) => {
+  try {
+    ct += 200;
+    connection.conn.query("select * from student_master limit 200 offset ?", [ct], (err, result) => {
+      if (err) throw err;
+
+      else {
+        let no = (ct / 200) + 1;
+        res.render('../views/simple_grid_with_pagination_and_also_sorting/index', { result: result, no: no });
       }
+    })
+
+  } catch (error) {
+    res.send(error);
+  }
 })
-  
+
+router.get('/grid/last', (req, res) => {
+  try {
+    ct = 99800;
+    connection.conn.query("select * from student_master limit 200 offset ?", [ct], (err, result) => {
+      if (err) throw err;
+
+      else {
+        let no = (ct / 200) + 1;
+        res.render('../views/simple_grid_with_pagination_and_also_sorting/index', { result: result, no: no });
+      }
+    })
+  } catch (error) {
+    res.send(error);
+  }
 })
 
 
@@ -99,4 +106,3 @@ module.exports = router;
 
 
 
-  
