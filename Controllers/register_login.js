@@ -22,6 +22,17 @@ const executequery = (str) => {
   })
 }
 
+const executequery2 = (str,x) => {
+  return new Promise((resolve, reject) => {
+    connection.conn.query(str,x,(err, result) => {
+      if (err) reject(err);
+
+      resolve(result);
+      console.log(result);
+    })
+  })
+}
+
 router.get("/", (req, res) => {
   res.render("../views/login");
 })
@@ -69,7 +80,7 @@ router.get("/register", async (req, res) => {
 
 
 
-
+// with parameterized query 
 
 router.post("/login", async (req, res) => {
   let body = req.body;
@@ -77,15 +88,15 @@ router.post("/login", async (req, res) => {
   try {
     if (body.email && body.password) {
 
-      q = `select count(*) as counter from user_registration where email='${body.email}'`;
+      q = `select count(*) as counter from user_registration where email= ? `;
 
-      result = await executequery(q);
+      result = await executequery2(q,body.email);
 
       if (result[0].counter == 1) {
 
-        q = `select id,pw_salt,password from user_registration where email='${body.email}';`
+        q = `select id,pw_salt,password from user_registration where email= ? ;`
 
-        result2 = await executequery(q);
+        result2 = await executequery2(q,body.email);
 
         let salt = result2[0].pw_salt;
 
