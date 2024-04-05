@@ -6,15 +6,14 @@ const verify = (req,res,next) => {
     if (token) {
       jwt.verify(token, process.env.SECRET_KEY, (err)=> {
         if (err) {
-          res.status(403).send({ success: false, message: "Failed to authenticate user." })
+           res.redirect("/");
         } else {
           next();
         }
       })
     } else {
-      res.status(403).send({ success: false, message: "No Token Provided." })
+      res.redirect("/");
     }
-//   jwt.verify(req.cookie.token, process.env.SECRETKEY)
 }
 
 module.exports = verify;

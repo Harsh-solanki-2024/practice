@@ -20,6 +20,10 @@
     "mysql": "^2.18.1",
     "nodemon": "^3.1.0",
     "passport-jwt": "^4.0.1",
+    "pino": "^8.19.0",
+    "pino-express": "^1.1.1",
+    "pino-http": "^9.0.0",
+    "pino-pretty": "^11.0.0",
     "short-unique-id": "^5.0.3"
   }
 }

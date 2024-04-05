@@ -4,10 +4,10 @@ var md5 = require('md5');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 const verify = require('../middlewares/authorization.js');
-const ShortUniqueId = require('short-unique-id');
-const uid = new ShortUniqueId();
+const { route } = require('./Crud_job_form.js');
+const pino = require('pino-http')();
 
-
+router.use(pino);
 
 let lastid, str, str2, secretkey = process.env.SECRET_KEY;
 
@@ -33,9 +33,17 @@ const executequery2 = (str,x) => {
   })
 }
 
+
 router.get("/", (req, res) => {
+  if(!req.cookies.token)
+  {
   res.render("../views/login");
+  }
+  else{
+    res.redirect("/Home");
+  }
 })
+
 
 
 
